@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🖤❤️ One Question</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle, #1a0000, #000000);
+      font-family: "Comic Sans MS", Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: #0d0d0d;
+      padding: 35px;
+      border-radius: 28px;
+      text-align: center;
+      width: 330px;
+      border: 2px solid #ff1a1a;
+      box-shadow: 0 0 35px rgba(255,0,0,0.6);
+      animation: popIn 1s ease;
+      z-index: 5;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    h2 {
+      color: #ff1a1a;
+      margin-bottom: 6px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff1a1a; }
+      to { text-shadow: 0 0 15px #ff1a1a; }
+    }
+
+    p {
+      color: white;
+      font-size: 18px;
+      margin: 12px 0;
+      min-height: 24px;
+    }
+
+    button {
+      padding: 12px 28px;
+      margin: 12px;
+      border: none;
+      border-radius: 30px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff1a1a;
+      color: white;
+      box-shadow: 0 0 15px rgba(255,26,26,0.8);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    #no {
+      background: #333;
+      color: white;
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: 26px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(-10vh) rotate(360deg);
+      }
+    }
+
+    .cute {
+      position: absolute;
+      font-size: 22px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- cute corner stickers -->
+  <div class="cute" style="top:20px; left:20px;">🖤</div>
+  <div class="cute" style="top:20px; right:20px;">❤️</div>
+  <div class="cute" style="bottom:20px; left:20px;">😳</div>
+  <div class="cute" style="bottom:20px; right:20px;">💌</div>
+
+  <div class="card">
+    <h2>Hey 🖤</h2>
+    <p id="text">Will you go out with me?</p>
+    <button id="yes" onclick="yesClick()">Yes ❤️</button>
+  </div>
+
+  <button id="no">No 🙈</button>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const text = document.getElementById("text");
+
+    const messages = [
+      "Are you sure? 😳",
+      "Think again 🖤",
+      "My heart says yes ❤️",
+      "Don’t be shy 🙈",
+      "Okay okay… you know you want to 😌"
+    ];
+
+    let count = 0;
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      if (count < messages.length) {
+        text.innerText = messages[count];
+        count++;
+      }
+    });
+
+    function yesClick() {
+      document.body.innerHTML = `
+        <div style="text-align:center; color:#ff1a1a; animation: popIn 1s ease;">
+          <h1>YAY ❤️🖤</h1>
+          <h2>You said YES 😍</h2>
+          <p style="color:white;">Best moment ever 💞</p>
+        </div>
+      `;
+    }
+
+    // floating sticker rain
+    setInterval(() => {
+      const stickers = ["❤️","🖤","💌","😍","🥰"];
+      const s = document.createElement("div");
+      s.className = "sticker";
+      s.innerHTML = stickers[Math.floor(Math.random()*stickers.length)];
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 7000);
+    }, 300);
+  </script>
+
+</body>
+</html>
